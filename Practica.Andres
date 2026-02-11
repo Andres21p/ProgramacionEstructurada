@@ -1,0 +1,129 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ProgramacionEstructurada21
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int cantidadPersonas = 0;
+            string nombrePersona;
+            int edadPersona;
+
+            // Validación con excepciones para la cantidad de personas
+            while (true)
+            {
+                Console.WriteLine("Ingrese la cantidad de personas a comparar:");
+                string entrada = Console.ReadLine();
+
+                try
+                {
+                    cantidadPersonas = int.Parse(entrada);
+
+                    if (cantidadPersonas < 1)
+                    {
+                        Console.WriteLine("Debe ingresar un número mayor o igual a 1.\n");
+                    }
+                    else
+                    {
+                        break; // salida del ciclo si la entrada es válida
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Entrada inválida. Debe ingresar un número entero.\n");
+                }
+            }
+
+            if (cantidadPersonas == 1)
+            {
+                Console.WriteLine("Ingrese el nombre de la persona: ");
+                nombrePersona = Console.ReadLine();
+
+                // Validación con excepciones para la edad
+                while (true)
+                {
+                    Console.WriteLine("Ingrese la edad de la persona:");
+                    string entradaEdad = Console.ReadLine();
+
+                    try
+                    {
+                        edadPersona = int.Parse(entradaEdad);
+                        break;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Edad inválida. Debe ingresar un número entero.\n");
+                    }
+                }
+
+                if (edadPersona <= 18)
+                {
+                    Console.WriteLine(nombrePersona + " es menor de edad");
+                }
+                else
+                {
+                    Console.WriteLine(nombrePersona + " es mayor de edad");
+                }
+            }
+            else
+            {
+                List<string> nombrePersonasMayores = new List<string>();
+                List<int> edadesPersonasMayores = new List<int>();
+                List<string> nombrePersonasMenores = new List<string>();
+                List<int> edadesPersonasMenores = new List<int>();
+
+                int valorTemporal = 0;
+
+                for (int i = 0; i < cantidadPersonas; i++)
+                {
+                    valorTemporal = i + 1;
+
+                    Console.WriteLine("Ingrese el nombre de la persona número " + valorTemporal + ":");
+                    nombrePersona = Console.ReadLine();
+
+                    // Validación con excepciones para cada edad
+                    while (true)
+                    {
+                        Console.WriteLine("Ingrese la edad de la persona número " + valorTemporal + ":");
+                        string entradaEdad = Console.ReadLine();
+
+                        try
+                        {
+                            edadPersona = int.Parse(entradaEdad);
+                            break;
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Edad inválida. Debe ingresar un número entero.\n");
+                        }
+                    }
+
+                    if (edadPersona >= 18)
+                    {
+                        nombrePersonasMayores.Add(nombrePersona);
+                        edadesPersonasMayores.Add(edadPersona);
+                    }
+                    else
+                    {
+                        nombrePersonasMenores.Add(nombrePersona);
+                        edadesPersonasMenores.Add(edadPersona);
+                    }
+                }
+
+                Console.WriteLine("\nPersonas Mayores: ");
+                for (int i = 0; i < nombrePersonasMayores.Count; i++)
+                {
+                    Console.WriteLine(nombrePersonasMayores[i] + " - " + edadesPersonasMayores[i]);
+                }
+
+                Console.WriteLine("\nPersonas Menores: ");
+                for (int i = 0; i < nombrePersonasMenores.Count; i++)
+                {
+                    Console.WriteLine(nombrePersonasMenores[i] + " - " + edadesPersonasMenores[i]);
+                }
+            }
+        }
+    }
+}
